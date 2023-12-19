@@ -47,8 +47,6 @@
 		console.log(search_params.get("token"))
 		var responseHandler = function (txn) {
 			if(txn.status === 200){
-				// txn.txnResponse.transaction_response
-				console.log("test")
 				axios("https://insta-port-backend-api.vercel.app/customer-transactions/create", {
 					method: "POST",
 					headers: {
@@ -85,11 +83,11 @@
 				}
 			})
 				.then((res) => {
-
 					var flow_config = {
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
+						returnUrl: "http://localhost:1000/authtest",
 						childWindow: true,
 						retryCount: 0,
 						prefs: {
