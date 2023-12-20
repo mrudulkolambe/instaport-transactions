@@ -80,7 +80,10 @@
 				data: {
 					ip: ip,
 					user_agent: window.navigator.userAgent,
-					amount: amount
+					amount: amount,
+				},
+				headers: {
+					"authorization": search_params.get("token")
 				}
 			})
 				.then((res) => {
