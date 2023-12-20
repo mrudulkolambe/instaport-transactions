@@ -46,8 +46,8 @@
 		let search_params = url.searchParams;
 		console.log(search_params.get("token"))
 		var responseHandler = function (txn) {
-			if(txn.status === 200){
-				axios("http://localhost:1000/customer-transactions/create", {
+			if (txn.status === 200) {
+				axios("https://insta-port-backend-api.vercel.app/customer-transactions/wallet-topup", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -56,13 +56,13 @@
 						transaction: txn.txnResponse.transaction_response,
 					}
 				})
-				.then((res) => {
-					console.log(res.data.message)
-					// alert("transaction sucess")
-				})
-				.catch((err) => {
-					alert(err.message)
-				})
+					.then((res) => {
+						console.log(res.data.message)
+						// alert("transaction sucess")
+					})
+					.catch((err) => {
+						alert(err.message)
+					})
 			}
 		}
 
@@ -74,21 +74,25 @@
 				.then((data) => {
 					ip = data.ip
 				});
-			axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
+			console.log(search_params.get("token"))
+			axios("https://insta-port-backend-api.vercel.app/auth/topup-wallet", {
+				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
+				headers: {
+					"Authorization": `Bearer ${search_params.get("token")}`
+				},
 				data: {
 					ip: ip,
 					user_agent: window.navigator.userAgent,
 					amount: amount
-				}
+				},
 			})
 				.then((res) => {
-					print(res.data)
 					var flow_config = {
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: "https://insta-port-backend-api.vercel.app/authtest",
+						returnUrl: "https://insta-port-backend-api.vercel.app/customer-transactions/wallet-topup",
 						childWindow: false,
 						retryCount: 0,
 						prefs: {
