@@ -72,9 +72,10 @@
 			fetch('https://api.ipify.org?format=json')
 				.then(response => response.json())
 				.then((data) => {
+					console.log(data)
 					ip = data.ip
 				});
-			axios("http://192.168.0.104:1000/auth/create-order/upi", {
+			axios("https://insta-port-backend-api.vercel.app/auth/create-order/upi", {
 				method: "POST",
 				data: {
 					ip: ip,
