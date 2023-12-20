@@ -47,7 +47,7 @@
 		console.log(search_params.get("token"))
 		var responseHandler = function (txn) {
 			if(txn.status === 200){
-				axios("http://localhost:1000/customer-transactions/create", {
+				axios("https://insta-port-backend-api.vercel.app/customer-transactions/create", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -74,7 +74,7 @@
 				.then((data) => {
 					ip = data.ip
 				});
-			axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
+			axios("https://insta-port-backend-api.vercel.app/auth/create-order/upi", {
 				method: "POST",
 				data: {
 					ip: ip,
@@ -92,7 +92,7 @@
 						childWindow: true,
 						retryCount: 0,
 						prefs: {
-							"payment_categories": ["card", "upi", "qr"],
+							"payment_categories": ["upi"],
 						},
 						themeConfig: {
 							sdkPrimaryColor: "#69068a",
