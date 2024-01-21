@@ -23,7 +23,7 @@
 			<label for="amount" class="mb-1 cursor-pointer text-sm font-semibold">Enter the topup amount: </label>
 			<input type="number" id="amount" placeholder="Topup money"
 				class="outline-none border-2 border-yellow-400 rounded-lg bg-white px-4 py-3">
-			<button onclick="handleTopUp()"
+			<button id="submitButton" type="button" onclick="handleTopUp()"
 				class="outline-none bg-yellow-400 text-white rounded-lg px-3 py-3 mt-4 text-sm font-semibold"
 				type="button">Add Money</button>
 		</div>
@@ -42,12 +42,12 @@
 		integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
+		const submitButton = document.getElementById("submitButton");
 		let url = new URL(window.location.href);
 		let search_params = url.searchParams;
-		console.log(search_params.get("token"))
 		var responseHandler = function (txn) {
 			if (txn.status === 200) {
-				axios("https://insta-port-backend-api.vercel.app/customer-transactions/wallet-topup", {
+				axios("https://instaport-backend-main.vercel.app/customer-transactions/wallet-topup", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -68,13 +68,13 @@
 
 		const handleTopUp = () => {
 			let ip = "";
+			submitButton.innerHTML = "Initiating..."
 			let amount = document.getElementById("amount").value
 			fetch('https://api.ipify.org?format=json')
 				.then(response => response.json())
 				.then((data) => {
 					ip = data.ip
 				});
-			console.log(search_params.get("token"))
 			axios("https://insta-port-backend-api.vercel.app/auth/topup-wallet", {
 				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
