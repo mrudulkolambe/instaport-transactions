@@ -56,11 +56,11 @@
 					}
 				})
 					.then((res) => {
-						console.log(res.data.message)
+						console.log("res", res.data.message, txn.txnResponse.transaction_response)
 						// alert("transaction sucess")
 					})
 					.catch((err) => {
-						alert(err.message)
+						alert("error:", err.message)
 					})
 			}
 		}
@@ -87,6 +87,7 @@
 				},
 			})
 				.then((res) => {
+					console.log(res.data)
 					var flow_config = {
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
