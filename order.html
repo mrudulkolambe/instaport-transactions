@@ -16,14 +16,14 @@
 	</style>
 </head>
 
-<body class="bg-yellow-50 flex justify-center items-center h-screen w-screen">
+<body onload="handleOrderPayment()" class="bg-yellow-50 flex justify-center items-center h-screen w-screen">
 	<form class="bg-white border-yellow-400 border-2 rounded-xl p-6 lg:w-1/3 w-[90%] shadow-xl flex flex-col">
 		<h1 class="text-center font-bold text-3xl mb-4">Top-Up Wallet</h1>
 		<div class="flex flex-col">
 			<label for="amount" class="mb-1 cursor-pointer text-sm font-semibold">Enter the topup amount: </label>
 			<input type="number" id="amount" placeholder="Topup money"
 				class="outline-none border-2 border-yellow-400 rounded-lg bg-white px-4 py-3">
-			<button onclick="handleTopUp()"
+			<button 
 				class="outline-none bg-yellow-400 text-white rounded-lg px-3 py-3 mt-4 text-sm font-semibold"
 				type="button">Add Money</button>
 		</div>
@@ -44,7 +44,7 @@
 	<script>
 		let url = new URL(window.location.href);
 		let search_params = url.searchParams;
-		var responseHandler = function (txn) {
+		var responseHandler = function (txn, orderData) {
 			if (txn.status === 200) {
 				axios("https://instaport-backend-main.vercel.app/customer-transactions/wallet-topup", {
 					method: "POST",
@@ -65,16 +65,15 @@
 			}
 		}
 
-		const handleTopUp = () => {
+		const handleOrderPayment = () => {
 			let ip = "";
-			let amount = document.getElementById("amount").value
 			fetch('https://api.ipify.org?format=json')
-				.then(response => response.json())
-				.then((data) => {
-					ip = data.ip
-				});
-			console.log(search_params.get("token"))
-			axios("https://instaport-backend-main.vercel.app/auth/topup-wallet", {
+			.then(response => response.json())
+			.then((data) => {
+				ip = data.ip
+			});
+			document.getElementById("amount").value = search_params.get("order")
+			axios("https://instaport-backend-main.vercel.app/auth/payment-order", {
 				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
 				headers: {
@@ -83,7 +82,8 @@
 				data: {
 					ip: ip,
 					user_agent: window.navigator.userAgent,
-					amount: amount
+					amount: amount,
+					order: search_params.get("amount")
 				},
 			})
 				.then((res) => {
@@ -91,7 +91,7 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: "https://instaport-backend-main.vercel.app/customer-transactions/wallet-topup",
+						returnUrl: `https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`,
 						childWindow: false,
 						retryCount: 0,
 						prefs: {
