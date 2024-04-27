@@ -46,7 +46,7 @@
 		let search_params = url.searchParams;
 		var responseHandler = function (txn, orderData) {
 			if (txn.status === 200) {
-				axios("https://instaport-backend-main.vercel.app/customer-transactions/wallet-topup", {
+				axios(`https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`, {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
