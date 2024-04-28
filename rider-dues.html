@@ -74,7 +74,6 @@
 					ip = data.ip
 				});
 			axios("https://instaport-backend-main.vercel.app/auth/payment-dues-rider", {
-				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
 				headers: {
 					"Authorization": `Bearer ${search_params.get("token")}`
@@ -91,7 +90,7 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: `https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`,
+						returnUrl: `https://instaport-backend-main.vercel.app/rider/app-payment/`,
 						childWindow: false,
 						retryCount: 0,
 						prefs: {
