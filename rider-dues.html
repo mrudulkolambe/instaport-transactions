@@ -42,9 +42,9 @@
 	<script>
 		let url = new URL(window.location.href);
 		let search_params = url.searchParams;
-		var responseHandler = function (txn, orderData) {
+		var responseHandler = function () {
 			if (txn.status === 200) {
-				axios(`https://instaport-backend-main.vercel.app/rider/app-payment/${search_params.get("txnID")}`, {
+				axios(`https://instaport-backend-main.vercel.app/rider/app-payment/`, {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -64,7 +64,6 @@
 		}
 		const handleLoading = () => {
 			document.getElementById("amount").value = search_params.get("amount")
-			document.getElementById("txn").value = search_params.get("txnID")
 			handleDuePayment();
 		}
 		const handleDuePayment = () => {
@@ -84,7 +83,6 @@
 					ip: ip,
 					user_agent: window.navigator.userAgent,
 					amount: search_params.get("amount"),
-					txnID: search_params.get("txnID")
 				},
 			})
 				.then((res) => {
