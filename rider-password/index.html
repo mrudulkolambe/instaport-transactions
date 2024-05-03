@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>otp verification</title>
+</head>
+
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"
+		integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript">
+		let url = new URL(window.location.href);
+		let search_params = url.searchParams;
+		let phoneNumber = search_params.get("phone")
+		var configuration = {
+			widgetId: "34647372764f363639383831",
+			tokenAuth: "420448Tp5wQUm5wEIC6622b5f1P1",
+			identifier: phoneNumber,
+			exposeMethods: "<true | false> (optional)",
+			success: (data) => {
+				updateRider()
+			},
+			failure: (error) => {
+				callLeaveVerification()
+			},
+		};
+	</script>
+	<script type="text/javascript" onload="initSendOTP(configuration)"
+		src="https://control.msg91.com/app/assets/otp-provider/otp-provider.js"> </script>
+	<script>
+		function callLeaveVerification() {
+			window.flutter_inappwebview.callHandler('leaveVerification');
+		}
+		async function updateRider() {
+			window.location.href = `/rider-password/reset.html?phone=${phoneNumber}`
+		}
+	</script>
+
+</body>
+
+</html>
