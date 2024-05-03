@@ -42,7 +42,7 @@
 		}
 		async function updateRider(token) {
 			axios("https://instaport-backend-main.vercel.app/rider/update", {
-				method: "POST",
+				method: "PATCH",
 				headers: {
 					"Authorization": `Bearer ${token}`
 				},
