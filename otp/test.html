@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		var configuration = {
+			exposeMethods: true,
+			tokenAuth: "420448Tp5wQUm5wEIC6622b5f1P1",
+		};
+	</script>
+	<script type="text/javascript" onload="initSendOTP(configuration)"
+		src="https://control.msg91.com/app/assets/otp-provider/otp-provider.js"></script>
+	<script>
+
+		function send() {
+			// example: email as identifier
+			window.sendOtp(
+				'917057094772', // mandatory
+				(data) => console.log('OTP sent successfully.'),
+				(error) => console.log('Error occurred')
+			);
+
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>otp verification</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		let url = new URL(window.location.href);
+		let search_params = url.searchParams;
+		let phoneNumber = search_params.get("phone")
+		var configuration = {
+			widgetId: "34647372764f363639383831",
+			tokenAuth: "420448Tp5wQUm5wEIC6622b5f1P1",
+			identifier: phoneNumber,
+			exposeMethods: "<true | false> (optional)",
+			success: (data) => {
+				callJavaScriptFunction(data)
+			},
+			failure: (error) => {
+				callJavaScriptFunction(error)
+			},
+		};
+	</script>
+	<script type="text/javascript" onload="initSendOTP(configuration)"
+		src="https://control.msg91.com/app/assets/otp-provider/otp-provider.js"> </script>
+	<script>
+		function callJavaScriptFunction() {
+			window.flutter_inappwebview.callHandler('otphandler');
+		}
+	</script>
+
+</body>
+
+</html>
