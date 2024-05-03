@@ -22,9 +22,8 @@
 			identifier: phoneNumber,
 			exposeMethods: "<true | false> (optional)",
 			success: (data) => {
-				if (data.type === "success") {
-					updateRider(token)
-				}
+				console.log(data)
+				updateRider(token)
 			},
 			failure: (error) => {
 				callLeaveVerification()
