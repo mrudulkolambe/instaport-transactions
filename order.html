@@ -44,7 +44,8 @@
 		let search_params = url.searchParams;
 		var responseHandler = function (txn, orderData) {
 			if (txn.status === 200) {
-				axios(`https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`, {
+				axios(`http://192.168.0.105:1000/customer-transactions/app-create-payment/${search_params.get("order")}`, {
+				// axios(`https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`, {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -74,7 +75,8 @@
 				.then((data) => {
 					ip = data.ip
 				});
-			axios("https://instaport-backend-main.vercel.app/auth/payment-order", {
+			axios("http://192.168.0.105:1000/auth/payment-order", {
+			// axios("https://instaport-backend-main.vercel.app/auth/payment-order", {
 				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
 				headers: {
@@ -93,7 +95,8 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: `https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`,
+						returnUrl: `http://192.168.0.105:1000/customer-transactions/app-create-payment/${search_params.get("order")}`,
+						// returnUrl: `https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`,
 						childWindow: false,
 						retryCount: 0,
 						prefs: {
