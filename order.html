@@ -32,10 +32,13 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
 		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
 		</script>
-	<script type="module" src="https://uat1.billdesk.com/merchant-
+	<!-- <script type="module" src="https://uat1.billdesk.com/merchant-
 	uat/sdk/dist/billdesksdk/billdesksdk.esm.js"></script>
 	<script nomodule="" src="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk.js"></script>
-	<link href="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
+	<link href="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk/billdesksdk.css" rel="stylesheet"> -->
+	<script type="module" src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.esm.js"></script>
+	<script nomodule src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk.js"></script>
+	<link href="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"
 		integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -44,8 +47,8 @@
 		let search_params = url.searchParams;
 		var responseHandler = function (txn, orderData) {
 			if (txn.status === 200) {
-				axios(`http://192.168.0.105:1000/customer-transactions/app-create-payment/${search_params.get("order")}`, {
-				// axios(`https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`, {
+				axios(`http://13.202.178.247:1000/customer-transactions/app-create-payment/${search_params.get("order")}`, {
+					// axios(`https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`, {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -75,8 +78,8 @@
 				.then((data) => {
 					ip = data.ip
 				});
-			axios("http://192.168.0.105:1000/auth/payment-order", {
-			// axios("https://instaport-backend-main.vercel.app/auth/payment-order", {
+			axios("http://13.202.178.247:1000/auth/payment-order", {
+				// axios("https://instaport-backend-main.vercel.app/auth/payment-order", {
 				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
 				headers: {
@@ -95,7 +98,7 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: `http://192.168.0.105:1000/customer-transactions/app-create-payment/${search_params.get("order")}`,
+						returnUrl: `http://13.202.178.247:1000/customer-transactions/app-create-payment/${search_params.get("order")}`,
 						// returnUrl: `https://instaport-backend-main.vercel.app/customer-transactions/app-create-payment/${search_params.get("order")}`,
 						childWindow: false,
 						retryCount: 0,

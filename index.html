@@ -34,6 +34,10 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
 		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
 		</script>
+	<!-- <script type="module" src="https://uat1.billdesk.com/merchant-
+		uat/sdk/dist/billdesksdk/billdesksdk.esm.js"></script>
+	<script nomodule="" src="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk.js"></script>
+	<link href="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk/billdesksdk.css" rel="stylesheet"> -->
 	<script type="module" src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.esm.js"></script>
 	<script nomodule src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk.js"></script>
 	<link href="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
@@ -46,7 +50,8 @@
 		let search_params = url.searchParams;
 		var responseHandler = function (txn) {
 			if (txn.status === 200) {
-				axios("http://13.202.178.247:1000/customer-transactions/wallet-topup", {
+				// axios("http://localhost:1000/customer-transactions/wallet-topup", {
+					axios("http://13.202.178.247:1000/customer-transactions/wallet-topup", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -74,7 +79,8 @@
 				.then((data) => {
 					ip = data.ip
 				});
-			axios("http://13.202.178.247:1000/auth/topup-wallet", {
+			// axios("http://localhost:1000/auth/topup-wallet", {
+				axios("http://13.202.178.247:1000/auth/topup-wallet", {
 				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
 				method: "POST",
 				headers: {
@@ -91,6 +97,7 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
+						// returnUrl: "http://localhost:1000/customer-transactions/wallet-topup",
 						returnUrl: "http://13.202.178.247:1000/customer-transactions/wallet-topup",
 						childWindow: false,
 						retryCount: 0,
