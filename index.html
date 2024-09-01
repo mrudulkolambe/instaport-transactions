@@ -51,7 +51,7 @@
 		var responseHandler = function (txn) {
 			if (txn.status === 200) {
 				// axios("http://localhost:1000/customer-transactions/wallet-topup", {
-					axios("http://13.202.178.247:1000/customer-transactions/wallet-topup", {
+				axios("http://13.202.178.247:1000/customer-transactions/wallet-topup", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -77,58 +77,58 @@
 			fetch('https://api.ipify.org?format=json')
 				.then(response => response.json())
 				.then((data) => {
+					console.log(data)
 					ip = data.ip
-				});
-			// axios("http://localhost:1000/auth/topup-wallet", {
-				axios("http://13.202.178.247:1000/auth/topup-wallet", {
-				// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
-				method: "POST",
-				headers: {
-					"Authorization": `Bearer ${search_params.get("token")}`
-				},
-				data: {
-					ip: ip,
-					user_agent: window.navigator.userAgent,
-					amount: amount
-				},
-			})
-				.then((res) => {
-					var flow_config = {
-						merchantId: "INSTAPRTV2",
-						bdOrderId: res.data.bdorderid,
-						authToken: res.data.authorization,
-						// returnUrl: "http://localhost:1000/customer-transactions/wallet-topup",
-						returnUrl: "http://13.202.178.247:1000/customer-transactions/wallet-topup",
-						childWindow: false,
-						retryCount: 0,
-						prefs: {
-							"payment_categories": ["card", "upi", "qr"],
+
+					axios("http://13.202.178.247:1000/auth/topup-wallet", {
+						// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
+						method: "POST",
+						headers: {
+							"Authorization": `Bearer ${search_params.get("token")}`
 						},
-						themeConfig: {
-							sdkPrimaryColor: "#69068a",
-							sdkAccentColor: "#cf5df5",
-							sdkBackgroundColor: "#f2caff",
-							sdkBannerColor: "#982cbb"
-						}
-					};
+						data: {
+							ip: data.ip,
+							user_agent: window.navigator.userAgent,
+							amount: amount
+						},
+					})
+						.then((res) => {
+							var flow_config = {
+								merchantId: "INSTAPRTV2",
+								bdOrderId: res.data.bdorderid,
+								authToken: res.data.authorization,
+								// returnUrl: "http://localhost:1000/customer-transactions/wallet-topup",
+								returnUrl: "http://13.202.178.247:1000/customer-transactions/wallet-topup",
+								childWindow: false,
+								retryCount: 0,
+								prefs: {
+									"payment_categories": ["card", "upi", "qr"],
+								},
+								themeConfig: {
+									sdkPrimaryColor: "#69068a",
+									sdkAccentColor: "#cf5df5",
+									sdkBackgroundColor: "#f2caff",
+									sdkBannerColor: "#982cbb"
+								}
+							};
 
-					var config = {
-						merchantLogo: "https://instaportdelivery.com/assets/logo/logo.png",
-						flowConfig: flow_config,
-						flowType: "payments",
-						responseHandler: responseHandler,
-					};
+							var config = {
+								merchantLogo: "https://instaportdelivery.com/assets/logo/logo.png",
+								flowConfig: flow_config,
+								flowType: "payments",
+								responseHandler: responseHandler,
+							};
 
-					var xmlhttp = new XMLHttpRequest();
-					var jsonObj = "";
-					{
-						window.loadBillDeskSdk(config);
-					};
-				})
-				.catch((err) => {
-					console.log(err)
-				})
-
+							var xmlhttp = new XMLHttpRequest();
+							var jsonObj = "";
+							{
+								window.loadBillDeskSdk(config);
+							};
+						})
+						.catch((err) => {
+							console.log(err)
+						})
+				});
 		}
 	</script>
 </body>
