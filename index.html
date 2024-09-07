@@ -4,12 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https:;">
 	<title>Topup - Wallet</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link
-		href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
-		rel="stylesheet" />
+	href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+	rel="stylesheet" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script type="module" src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.esm.js"></script>
@@ -35,12 +34,6 @@
 				type="button">Add Money</button>
 		</div>
 	</form>
-
-
-	<!-- <script type="module" src="https://uat1.billdesk.com/merchant-
-		uat/sdk/dist/billdesksdk/billdesksdk.esm.js"></script>
-	<script nomodule="" src="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk.js"></script>
-	<link href="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk/billdesksdk.css" rel="stylesheet"> -->
 	<script>
 		const submitButton = document.getElementById("submitButton");
 		let url = new URL(window.location.href);
@@ -48,7 +41,7 @@
 		var responseHandler = function (txn) {
 			if (txn.status === 200) {
 				// axios("http://localhost:1000/customer-transactions/wallet-topup", {
-				axios("http://13.202.178.247:1000/customer-transactions/wallet-topup", {
+				axios("https://instaportdelivery.in/customer-transactions/wallet-topup", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -77,9 +70,7 @@
 					console.log(data)
 					ip = data.ip
 
-					// axios("http://localhost:1000/auth/topup-wallet", {
-					axios("http://13.202.178.247:1000/auth/topup-wallet", {
-						// axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
+					axios("https://instaportdelivery.in/auth/topup-wallet", {
 						method: "POST",
 						headers: {
 							"Authorization": `Bearer ${search_params.get("token")}`
@@ -96,7 +87,7 @@
 								bdOrderId: res.data.bdorderid,
 								authToken: res.data.authorization,
 								// returnUrl: "http://localhost:1000/customer-transactions/wallet-topup",
-								returnUrl: "http://13.202.178.247:1000/customer-transactions/wallet-topup",
+								returnUrl: "https://instaportdelivery.in/customer-transactions/wallet-topup",
 								childWindow: false,
 								retryCount: 0,
 								prefs: {

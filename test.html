@@ -9,6 +9,12 @@
 	<link
 		href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
 		rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="module" src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.esm.js"></script>
+	<script nomodule src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk.js"></script>
+	<link href="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
 	<style>
 		body {
 			font-family: 'Poppins' !important;
@@ -26,25 +32,13 @@
 		</div>
 	</form>
 
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
-		</script>
-	<script type="module" src="https://uat1.billdesk.com/merchant-
-	uat/sdk/dist/billdesksdk/billdesksdk.esm.js"></script>
-	<script nomodule="" src="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk.js"></script>
-	<link href="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"
-		integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		let url = new URL(window.location.href);
 		let search_params = url.searchParams;
 		console.log(search_params.get("token"))
 		var responseHandler = function (txn) {
 			if (txn.status === 200) {
-				axios("https://instaport-backend-main.vercel.app/customer-transactions/create", {
+				axios("https://instaportdelivery.in/customer-transactions/create", {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -72,7 +66,7 @@
 					console.log(JSON.stringify(data))
 					ip = data.ip
 				});
-			axios("https://insta-port-backend-api.vercel.app/auth/create-order/upi", {
+			axios("https://instaportdelivery.in/auth/create-order/upi", {
 				method: "POST",
 				data: {
 					ip: ip,
@@ -89,7 +83,7 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: "https://insta-port-backend-api.vercel.app/authtest",
+						returnUrl: "https://instaportdelivery.in/authtest",
 						childWindow: false,
 						retryCount: 0,
 						prefs: {

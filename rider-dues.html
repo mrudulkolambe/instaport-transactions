@@ -9,6 +9,12 @@
 	<link
 		href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
 		rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="module" src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.esm.js"></script>
+	<script nomodule src="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk.js"></script>
+	<link href="https://pay.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
 	<style>
 		body {
 			font-family: 'Poppins' !important;
@@ -28,23 +34,12 @@
 	</form>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
-		</script>
-	<script type="module" src="https://uat1.billdesk.com/merchant-
-	uat/sdk/dist/billdesksdk/billdesksdk.esm.js"></script>
-	<script nomodule="" src="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk.js"></script>
-	<link href="https://uat1.billdesk.com/merchant-uat/sdk/dist/billdesksdk/billdesksdk.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"
-		integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		let url = new URL(window.location.href);
 		let search_params = url.searchParams;
 		var responseHandler = function () {
 			if (txn.status === 200) {
-				axios(`https://instaport-backend-main.vercel.app/rider/app-payment/`, {
+				axios(`https://instaportdelivery.in/rider/app-payment/`, {
 					method: "POST",
 					headers: {
 						"authorization": `Bearer ${search_params.get("token")}`
@@ -73,7 +68,7 @@
 				.then((data) => {
 					ip = data.ip
 				});
-			axios("https://instaport-backend-main.vercel.app/auth/payment-dues-rider", {
+			axios("https://instaportdelivery.in/auth/payment-dues-rider", {
 				method: "POST",
 				headers: {
 					"Authorization": `Bearer ${search_params.get("token")}`
@@ -90,7 +85,7 @@
 						merchantId: "UATINSPTV2",
 						bdOrderId: res.data.bdorderid,
 						authToken: res.data.authorization,
-						returnUrl: `https://instaport-backend-main.vercel.app/rider/app-payment/`,
+						returnUrl: `https://instaportdelivery.in/rider/app-payment/`,
 						childWindow: false,
 						retryCount: 0,
 						prefs: {

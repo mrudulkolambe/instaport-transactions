@@ -39,7 +39,7 @@
 			window.flutter_inappwebview.callHandler('leaveVerification');
 		}
 		async function updateCustomer(token) {
-			axios("https://instaport-backend-main.vercel.app/user/update", {
+			axios("https://instaportdelivery.in/user/update", {
 				method: "PATCH",
 				headers: {
 					"Authorization": `Bearer ${token}`
