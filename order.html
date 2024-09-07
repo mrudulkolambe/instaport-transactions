@@ -58,7 +58,7 @@
 			}
 		}
 		const handleLoading = () => {
-			document.getElementById("amount").value = Math.ceil(Number(search_params.get("amount")))
+			document.getElementById("amount").value = `${Math.ceil(Number(search_params.get("amount")))}`
 			document.getElementById("order").value = search_params.get("order")
 			handleOrderPayment();
 		}
@@ -75,7 +75,7 @@
 						data: {
 							ip: data.ip,
 							user_agent: window.navigator.userAgent,
-							amount: search_params.get("amount"),
+							amount: `${Math.ceil(Number(search_params.get("amount")))}`,
 							order: search_params.get("order")
 						},
 					})
