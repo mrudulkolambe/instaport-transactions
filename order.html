@@ -67,6 +67,7 @@
 			fetch('https://api.ipify.org?format=json')
 				.then(response => response.json())
 				.then((data) => {
+					console.log("IP", data)
 					axios("https://instaportdelivery.in/auth/payment-order", {
 						method: "POST",
 						headers: {
