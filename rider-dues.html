@@ -62,59 +62,58 @@
 			handleDuePayment();
 		}
 		const handleDuePayment = () => {
-			let ip = "";
 			fetch('https://api.ipify.org?format=json')
 				.then(response => response.json())
 				.then((data) => {
-					ip = data.ip
-				});
-			axios("https://instaportdelivery.in/auth/payment-dues-rider", {
-				method: "POST",
-				headers: {
-					"Authorization": `Bearer ${search_params.get("token")}`
-				},
-				data: {
-					ip: ip,
-					user_agent: window.navigator.userAgent,
-					amount: search_params.get("amount"),
-				},
-			})
-				.then((res) => {
-					console.log(res.data)
-					var flow_config = {
-						merchantId: "INSTAPRTV2",
-						bdOrderId: res.data.bdorderid,
-						authToken: res.data.authorization,
-						returnUrl: `https://instaportdelivery.in/rider/app-payment/`,
-						childWindow: false,
-						retryCount: 0,
-						prefs: {
-							"payment_categories": ["card", "upi", "qr"],
+					axios("https://instaportdelivery.in/auth/payment-dues-rider", {
+						method: "POST",
+						headers: {
+							"Authorization": `Bearer ${search_params.get("token")}`
 						},
-						themeConfig: {
-							sdkPrimaryColor: "#69068a",
-							sdkAccentColor: "#cf5df5",
-							sdkBackgroundColor: "#f2caff",
-							sdkBannerColor: "#982cbb"
-						}
-					};
+						data: {
+							ip: data.ip,
+							user_agent: window.navigator.userAgent,
+							amount: search_params.get("amount"),
+						},
+					})
+						.then((res) => {
+							console.log(res.data)
+							var flow_config = {
+								merchantId: "INSTAPRTV2",
+								bdOrderId: res.data.bdorderid,
+								authToken: res.data.authorization,
+								returnUrl: `https://instaportdelivery.in/rider/app-payment/`,
+								childWindow: false,
+								retryCount: 0,
+								prefs: {
+									"payment_categories": ["card", "upi", "qr"],
+								},
+								themeConfig: {
+									sdkPrimaryColor: "#69068a",
+									sdkAccentColor: "#cf5df5",
+									sdkBackgroundColor: "#f2caff",
+									sdkBannerColor: "#982cbb"
+								}
+							};
 
-					var config = {
-						merchantLogo: "https://instaportdelivery.com/assets/logo/logo.png",
-						flowConfig: flow_config,
-						flowType: "payments",
-						responseHandler: responseHandler,
-					};
+							var config = {
+								merchantLogo: "https://instaportdelivery.com/assets/logo/logo.png",
+								flowConfig: flow_config,
+								flowType: "payments",
+								responseHandler: responseHandler,
+							};
 
-					var xmlhttp = new XMLHttpRequest();
-					var jsonObj = "";
-					{
-						window.loadBillDeskSdk(config);
-					};
-				})
-				.catch((err) => {
-					console.log(err)
-				})
+							var xmlhttp = new XMLHttpRequest();
+							var jsonObj = "";
+							{
+								window.loadBillDeskSdk(config);
+							};
+						})
+						.catch((err) => {
+							console.log(err)
+						})
+				});
+
 
 		}
 	</script>
