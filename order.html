@@ -76,7 +76,7 @@
 						data: {
 							ip: data.ip,
 							user_agent: window.navigator.userAgent,
-							amount: `${Math.ceil(Number(search_params.get("amount")))}`,
+							amount: `${Math.round(Number(search_params.get("amount")))}`,
 							order: search_params.get("order")
 						},
 					})
