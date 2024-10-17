@@ -58,7 +58,7 @@
 			}
 		}
 		const handleLoading = () => {
-			document.getElementById("amount").value = `${Math.ceil(Number(search_params.get("amount")))}`
+			document.getElementById("amount").value = `${Math.round(Number(search_params.get("amount")))}`
 			document.getElementById("order").value = search_params.get("order")
 			handleOrderPayment();
 		}
